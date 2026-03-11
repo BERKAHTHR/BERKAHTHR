@@ -43,7 +43,7 @@
             position: sticky; top: 0; z-index: 100;
         }
         .logo-container { display: flex; flex-direction: column; }
-        .logo { color: var(--secondary); font-size: 1.5rem; font-weight: bold; }
+        .logo { color: var(--secondary); font-size: clamp(1.2rem, 4vw, 1.5rem); font-weight: bold; }
         .developer-credit { color: #eaf5f1; font-size: 0.75rem; font-style: italic; margin-top: 2px; }
         
         .nav-links { display: flex; gap: 20px; transition: 0.3s; }
@@ -53,7 +53,7 @@
         }
         .nav-links button:hover { color: var(--secondary); }
 
-        /* Hamburger Icon (Sembunyi di Laptop/PC) */
+        /* Hamburger Icon */
         .hamburger {
             display: none;
             font-size: 1.8rem;
@@ -63,31 +63,31 @@
         }
 
         /* Main 3D Card */
-        main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 20px; }
+        main { flex: 1; display: flex; justify-content: center; align-items: center; padding: 30px 15px; }
         .card-3d {
             background: linear-gradient(145deg, #ffffff, #e6e6e6);
             padding: 40px 30px;
             border-radius: 20px;
-            max-width: 450px;
+            max-width: 480px;
             width: 100%;
             box-shadow: 20px 20px 40px #c7d0cc, -20px -20px 40px #ffffff;
             transition: all 0.3s ease;
         }
 
-        h1 { color: var(--primary); margin-bottom: 10px; font-size: 1.6rem; text-align: center; }
+        h1 { color: var(--primary); margin-bottom: 10px; font-size: clamp(1.3rem, 5vw, 1.6rem); text-align: center; }
         p.subtitle { font-size: 0.95rem; color: #666; margin-bottom: 25px; text-align: center; line-height: 1.5; }
 
         /* Style Hitung Mundur Lebaran */
         .countdown-container {
-            display: flex; justify-content: center; gap: 12px; margin-top: 20px; margin-bottom: 15px;
+            display: flex; justify-content: center; gap: 8px; margin-top: 20px; margin-bottom: 15px; flex-wrap: wrap;
         }
         .time-box {
             background: linear-gradient(145deg, var(--primary), #02422f);
-            color: var(--secondary); padding: 15px 10px; border-radius: 12px;
-            min-width: 75px; text-align: center; box-shadow: 0 8px 15px rgba(4, 92, 67, 0.3); border: 1px solid var(--secondary);
+            color: var(--secondary); padding: 12px 5px; border-radius: 12px;
+            flex: 1; min-width: 65px; text-align: center; box-shadow: 0 8px 15px rgba(4, 92, 67, 0.3); border: 1px solid var(--secondary);
         }
-        .time-box span { display: block; font-size: 2rem; font-weight: bold; margin-bottom: 5px;}
-        .time-box small { font-size: 0.75rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
+        .time-box span { display: block; font-size: clamp(1.5rem, 5vw, 2rem); font-weight: bold; margin-bottom: 5px;}
+        .time-box small { font-size: 0.7rem; color: #fff; text-transform: uppercase; letter-spacing: 1px; }
         .eid-decoration { font-size: 4rem; text-align: center; margin-bottom: 15px; animation: float 3s ease-in-out infinite; }
 
         /* Form Inputs */
@@ -100,6 +100,32 @@
         }
         input[type="text"]:focus { border-color: var(--primary); }
 
+        /* Pilihan Nominal THR Styles */
+        .nominal-options { display: flex; gap: 10px; flex-wrap: wrap; }
+        .radio-container { flex: 1; min-width: 100px; position: relative; }
+        .radio-container input[type="radio"] { display: none; }
+        .radio-label {
+            display: block; padding: 12px 10px; text-align: center;
+            border: 2px solid #ddd; border-radius: 10px; cursor: pointer;
+            font-weight: bold; color: #666; font-size: 0.9rem; transition: all 0.3s;
+            background: #fafafa; height: 100%; display: flex; flex-direction: column; justify-content: center;
+        }
+        .radio-container input[type="radio"]:checked + .radio-label {
+            border-color: var(--secondary); background-color: #fdfaf0;
+            color: var(--primary); box-shadow: 0 4px 10px rgba(244, 196, 48, 0.2);
+        }
+
+        /* Kotak 100k Terkunci */
+        .locked-label {
+            display: block; padding: 12px 5px; text-align: center;
+            border: 2px dashed #bbb; border-radius: 10px; cursor: not-allowed;
+            font-weight: bold; color: #999; font-size: 0.85rem; background: #e9e9e9;
+            height: 100%; display: flex; flex-direction: column; justify-content: center;
+        }
+        .timer-text { font-size: 0.7rem; color: #d9534f; margin-top: 4px; font-weight: normal; }
+        #opsi-100k .radio-label { border-color: #f4c430; background: #fffdf5; color: #dcb028; }
+        #opsi-100k input[type="radio"]:checked + .radio-label { background: var(--primary); color: var(--secondary); border-color: var(--primary); }
+
         /* Quiz Styles */
         .quiz-question { margin-bottom: 20px; background: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 4px solid var(--secondary); text-align: left; }
         .quiz-question p { font-weight: bold; margin-bottom: 10px; color: var(--text); font-size: 0.95rem; line-height: 1.4;}
@@ -111,8 +137,7 @@
             width: 100%; background: linear-gradient(145deg, var(--secondary), #dcb028);
             color: var(--primary); padding: 15px; border: none; border-radius: 10px;
             font-size: 1.1rem; font-weight: bold; cursor: pointer; text-transform: uppercase;
-            box-shadow: 5px 5px 10px #c7d0cc, -5px -5px 10px #ffffff; transition: 0.2s;
-            margin-top: 10px;
+            box-shadow: 5px 5px 10px #c7d0cc, -5px -5px 10px #ffffff; transition: 0.2s; margin-top: 10px;
         }
         .btn:active { transform: translateY(2px); box-shadow: inset 5px 5px 10px rgba(0,0,0,0.1); }
         .btn:disabled { background: #ccc; cursor: not-allowed; color: #888; box-shadow: none; }
@@ -122,17 +147,15 @@
             background: linear-gradient(135deg, var(--dana-blue), #0b6db5); padding: 25px 20px;
             border-radius: 15px; color: white; margin-top: 20px; box-shadow: 0 10px 20px rgba(17, 142, 233, 0.3); text-align: center;
         }
-        .dana-card h2 { color: white; margin-bottom: 5px; font-size: 1.4rem;}
+        .dana-card h2 { color: white; margin-bottom: 5px; font-size: clamp(1.2rem, 4vw, 1.4rem);}
         .qr-box {
             background: white; padding: 10px; border-radius: 10px; display: inline-block;
             margin: 15px 0 10px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        .qr-box img { width: 150px; height: 150px; display: block; }
-        
+        .qr-box img { width: 100%; max-width: 150px; height: auto; display: block; }
         .btn-unduh-qr {
-            background: transparent; color: white; border: 1px solid white;
-            padding: 8px 15px; border-radius: 8px; font-size: 0.85rem;
-            cursor: pointer; transition: 0.3s; display: inline-block; margin-bottom: 15px;
+            background: transparent; color: white; border: 1px solid white; padding: 8px 15px; 
+            border-radius: 8px; font-size: 0.85rem; cursor: pointer; transition: 0.3s; display: inline-block; margin-bottom: 15px;
         }
         .btn-unduh-qr:hover { background: white; color: var(--dana-blue); }
         .btn-dana {
@@ -149,9 +172,9 @@
         }
         .modal-content {
             background: white; padding: 30px; border-radius: 15px; max-width: 500px; width: 100%;
-            max-height: 80vh; overflow-y: auto; position: relative;
+            max-height: 85vh; overflow-y: auto; position: relative;
         }
-        .modal-content h2 { color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--secondary); padding-bottom: 10px;}
+        .modal-content h2 { color: var(--primary); margin-bottom: 15px; border-bottom: 2px solid var(--secondary); padding-bottom: 10px; font-size: 1.3rem;}
         .modal-content p, .modal-content li { font-size: 0.95rem; color: #555; line-height: 1.6; margin-bottom: 10px; }
         .modal-content ul, .modal-content ol { margin-left: 20px; margin-bottom: 15px; }
         .close-modal {
@@ -161,8 +184,7 @@
 
         /* Floating Audio Toggle */
         #music-toggle {
-            position: fixed; bottom: 20px; right: 20px;
-            background: var(--primary); color: white;
+            position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white;
             border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 1.5rem;
             cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999; 
             display: flex; align-items: center; justify-content: center; transition: transform 0.2s;
@@ -172,32 +194,45 @@
         /* Step Visibility */
         #step-1, #step-2, #step-3 { display: none; }
 
+        /* Rating & Ulasan Styles */
+        .rating-container {
+            background: #fff; padding: 20px; border-radius: 15px; margin-top: 25px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: left; border: 1px solid #eee;
+        }
+        .rating-container h3 { color: var(--primary); font-size: 1.1rem; margin-bottom: 5px; }
+        .stars { display: flex; gap: 5px; flex-direction: row-reverse; justify-content: flex-end; margin-bottom: 10px; flex-wrap: wrap;}
+        .stars input { display: none; }
+        .stars label { font-size: clamp(2rem, 6vw, 2.5rem); color: #ddd; cursor: pointer; transition: 0.2s; }
+        .stars input:checked ~ label, .stars label:hover, .stars label:hover ~ label { color: #f4c430; }
+        .ulasan-text { 
+            width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; 
+            background: #fafafa; outline: none; transition: 0.3s; resize: vertical;
+            font-family: inherit; margin-bottom: 10px;
+        }
+        .ulasan-text:focus { border-color: var(--primary); }
+
+        /* Style Pesan Pop-Up Hasil Kuis */
+        .pesan-kuis-box {
+            background: #fdfaf0; border-left: 5px solid var(--secondary);
+            padding: 15px; border-radius: 8px; margin-bottom: 20px; font-style: italic; color: #555; font-size: 0.9rem; line-height: 1.5;
+        }
+        .nilai-besar { font-size: 2.5rem; font-weight: bold; color: var(--primary); display: block; text-align: center; margin-bottom: 10px;}
+
         /* Responsif Tampilan HP */
-        @media (max-width: 480px) {
-            .hamburger { display: block; } /* Munculkan Icon Garis Tiga */
-            
+        @media (max-width: 600px) {
+            .hamburger { display: block; }
             .nav-links { 
-                display: none; /* Sembunyikan memanjang ke samping */
-                flex-direction: column; 
-                position: absolute; 
-                top: 60px; right: 20px; 
-                background: var(--primary); 
-                padding: 15px; 
-                border-radius: 10px; 
-                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                gap: 15px;
-                text-align: right;
+                display: none; flex-direction: column; position: absolute; 
+                top: 60px; right: 20px; background: var(--primary); 
+                padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); gap: 15px; text-align: right;
             }
-
-            .nav-links.active {
-                display: flex; /* Munculkan menu ke bawah saat ditekan */
-            }
-
+            .nav-links.active { display: flex; }
             .card-3d { padding: 25px 15px; }
+            .nominal-options { flex-direction: column; }
+            .radio-container { width: 100%; }
             .modal-content { padding: 20px; }
             #music-toggle { width: 45px; height: 45px; font-size: 1.2rem; bottom: 15px; right: 15px; }
-            .time-box { min-width: 60px; padding: 10px 5px; }
-            .time-box span { font-size: 1.5rem; }
+            .btn { font-size: 1rem; padding: 12px; }
         }
     </style>
 </head>
@@ -240,23 +275,55 @@
                     <div class="time-box"><span id="minutes">00</span><small>Menit</small></div>
                     <div class="time-box"><span id="seconds">00</span><small>Detik</small></div>
                 </div>
+                <p id="status-sinkron" style="text-align: center; color: #888; font-size: 0.75rem; margin-top: 10px;">Menyinkronkan waktu dengan satelit...</p>
                 <p style="text-align: center; color: var(--primary); font-size: 0.85rem; font-weight: bold; margin-top: 15px;">Minal Aidin Wal Faizin 🙏</p>
             </div>
             
             <div id="step-1">
                 <div style="font-size: 4rem; text-align: center; animation: float 3s ease-in-out infinite;">✨</div>
                 <h1>Program Berbagi Berkah</h1>
-                <p class="subtitle">Silakan masukkan nama lengkap Anda untuk memulai proses verifikasi penerimaan kebaikan ini.</p>
+                <p class="subtitle">Silakan isi data diri dan pilih nominal hadiah yang Anda inginkan.</p>
+                
                 <div class="form-group">
                     <label for="namaLengkap">Nama Lengkap</label>
                     <input type="text" id="namaLengkap" placeholder="Masukkan nama lengkap Anda..." autocomplete="off">
                 </div>
+
+                <div class="form-group">
+                    <label>Pilih Nominal THR</label>
+                    <div class="nominal-options">
+                        <div class="radio-container">
+                            <input type="radio" name="nominal" id="nom20" value="20000">
+                            <label for="nom20" class="radio-label">Rp 20.000</label>
+                        </div>
+                        <div class="radio-container">
+                            <input type="radio" name="nominal" id="nom50" value="50000">
+                            <label for="nom50" class="radio-label">Rp 50.000</label>
+                        </div>
+
+                        <div class="radio-container" id="opsi-100k-locked">
+                            <div class="locked-label">
+                                Rp 100.000 🔒
+                                <div class="timer-text" id="timer-100k">Menghitung...</div>
+                            </div>
+                        </div>
+
+                        <div class="radio-container" id="opsi-100k" style="display: none;">
+                            <input type="radio" name="nominal" id="nom100" value="100000">
+                            <label for="nom100" class="radio-label">Rp 100.000 ✨</label>
+                        </div>
+                    </div>
+                </div>
+
                 <button class="btn" onclick="lanjutKeKuis()">Mulai Kuis Islami</button>
             </div>
 
             <div id="step-2">
                 <h1>Uji Wawasan Keislaman</h1>
-                <p class="subtitle">Mari selesaikan beberapa pertanyaan singkat berikut sebagai syarat verifikasi.</p>
+                <p class="subtitle" style="color: var(--primary);">
+                    Program berbagi ini dipersembahkan oleh <strong>SukaCoding</strong>. 
+                </p>
+                <p class="subtitle">Mari selesaikan pertanyaan berikut sebagai syarat verifikasi pencairan <strong style="color:var(--secondary); background:var(--primary); padding:2px 8px; border-radius:5px;"><span id="tampil-nominal"></span></strong>.</p>
                 
                 <form id="quiz-form">
                     <div class="quiz-question">
@@ -270,30 +337,32 @@
                     </div>
 
                     <div class="quiz-question">
-                        <p>2. Bagaimana Anda memaknai pelaksanaan ibadah puasa di tahun ini?</p>
+                        <p>2. Ibadah puasa Ramadhan diwajibkan bagi umat Islam pada tahun ke berapa Hijriyah?</p>
                         <div class="options">
-                            <label><input type="radio" name="q2" value="Penuh Tantangan"> Penuh tantangan, namun insya Allah berkah</label>
-                            <label><input type="radio" name="q2" value="Cukup Menantang"> Cukup menantang</label>
-                            <label><input type="radio" name="q2" value="Berjalan Lancar"> Berjalan dengan lancar</label>
-                            <label><input type="radio" name="q2" value="Sangat Ringan"> Sangat ringan, Alhamdulillah</label>
+                            <label><input type="radio" name="q2" value="1 Hijriyah"> 1 Hijriyah</label>
+                            <label><input type="radio" name="q2" value="2 Hijriyah"> 2 Hijriyah</label>
+                            <label><input type="radio" name="q2" value="3 Hijriyah"> 3 Hijriyah</label>
+                            <label><input type="radio" name="q2" value="4 Hijriyah"> 4 Hijriyah</label>
                         </div>
                     </div>
 
                     <div class="quiz-question">
-                        <p>3. Apakah Anda menjalankan ibadah puasa dengan penuh kesungguhan?</p>
+                        <p>3. Malam kemuliaan pada bulan Ramadhan yang nilainya lebih baik dari seribu bulan disebut?</p>
                         <div class="options">
-                            <label><input type="radio" name="q3" value="Penuh & Bersyukur"> Alhamdulillah, penuh dan selalu bersyukur</label>
-                            <label><input type="radio" name="q3" value="Terdapat Udzur"> Terdapat udzur (halangan syar'i), namun tetap bersyukur</label>
-                            <label><input type="radio" name="q3" value="Perlu Peningkatan"> Penuh, namun merasa masih perlu peningkatan keikhlasan</label>
+                            <label><input type="radio" name="q3" value="Nuzulul Quran"> Nuzulul Qur'an</label>
+                            <label><input type="radio" name="q3" value="Lailatul Qadar"> Lailatul Qadar</label>
+                            <label><input type="radio" name="q3" value="Isra Miraj"> Isra Mi'raj</label>
+                            <label><input type="radio" name="q3" value="Lailatul Ijtima"> Lailatul Ijtima'</label>
                         </div>
                     </div>
 
                     <div class="quiz-question">
                         <p>4. Proses turunnya wahyu Al-Qur'an kepada Nabi Muhammad SAW terjadi secara?</p>
                         <div class="options">
-                            <label><input type="radio" name="q4" value="Sekaligus"> Sekaligus (Satu mushaf utuh secara langsung)</label>
-                            <label><input type="radio" name="q4" value="Berangsur"> Berangsur-angsur (Sesuai ketetapan Allah SWT)</label>
+                            <label><input type="radio" name="q4" value="Sekaligus"> Sekaligus (Satu mushaf utuh)</label>
+                            <label><input type="radio" name="q4" value="Berangsur"> Berangsur-angsur</label>
                             <label><input type="radio" name="q4" value="Mimpi"> Melalui perantara mimpi</label>
+                            <label><input type="radio" name="q4" value="Lauhul Mahfudz"> Ditulis langsung di batu</label>
                         </div>
                     </div>
 
@@ -302,12 +371,12 @@
             </div>
 
             <div id="step-3" style="text-align: center;">
-                <h1 style="color: #118ee9;">Alhamdulillah! Verifikasi Berhasil 🎉</h1>
-                <p class="subtitle">Jazakumullah khairan, <strong id="tampil-nama"></strong>! Jawaban Anda telah kami terima dengan baik. Silakan jemput rezeki Anda melalui tautan di bawah ini.</p>
+                <h1 style="color: #118ee9;">Alhamdulillah! 🎉</h1>
+                <p class="subtitle">Jazakumullah khairan, <strong id="tampil-nama"></strong>! Silakan jemput rezeki senilai <strong id="tampil-nominal-akhir"></strong> melalui tautan DANA Kaget di bawah ini.</p>
                 
                 <div class="dana-card">
                     <h2>Tautan DANA Kaget</h2>
-                    <p style="font-size: 0.9rem; margin-bottom: 10px;">Pindai kode QR atau klik tombol di bawah ini untuk menerima rezeki saldo DANA Anda. Semoga berkah!</p>
+                    <p style="font-size: 0.9rem; margin-bottom: 10px;">Pindai kode QR atau klik tombol di bawah ini untuk menerima rezeki Anda dari SukaCoding.</p>
                     
                     <div class="qr-box">
                         <img id="qr-code" src="qr.jpg" alt="QR Code DANA Kaget">
@@ -318,15 +387,49 @@
                     
                     <a href="MASUKKAN_LINK_DANA_KAGET_ANDA_DISINI" target="_blank" class="btn-dana">Klaim THR Sekarang</a>
                 </div>
+
+                <div class="rating-container" id="form-ulasan">
+                    <h3>Beri Nilai Aplikasi Ini ⭐</h3>
+                    <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">Bagaimana pengalaman Anda mengikuti program BerkahTHR?</p>
+                    
+                    <div class="stars">
+                        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                    </div>
+                    
+                    <textarea id="teks-ulasan" rows="3" class="ulasan-text" placeholder="Tuliskan komentar atau doa Anda di sini... (opsional)"></textarea>
+                    
+                    <button class="btn" id="btn-kirim-ulasan" style="padding: 12px; font-size: 0.95rem;">Kirim Ulasan</button>
+                </div>
+
+                <div id="ulasan-sukses" style="display:none; text-align:center; padding: 20px; background:#eaf5f1; border-radius: 10px; margin-top:25px; border: 1px solid var(--primary);">
+                    <p style="color: var(--primary); font-weight: bold; font-size: 1.1rem;">Terima kasih atas ulasan Anda! 🙏</p>
+                    <p style="font-size: 0.9rem; color: #555; margin-top: 5px;">Semoga rezekinya berkah.</p>
+                </div>
+
             </div>
 
         </div>
     </main>
 
+    <div class="modal-overlay" id="modal-hasil-kuis">
+        <div class="modal-content" style="text-align: center;">
+            <h2 style="border-bottom: none; margin-bottom: 5px;" id="judul-skor">Skor Anda</h2>
+            <span class="nilai-besar" id="tampil-skor">100</span>
+            <div class="pesan-kuis-box" id="pesan-skor">
+                </div>
+            <p style="font-size: 0.9rem; margin-bottom: 15px; font-weight: bold; color: var(--primary);">Jangan khawatir, Anda tetap berhak menerima THR ini sebagai bentuk silaturahmi!</p>
+            <button class="btn" id="btn-lanjut-klaim">Alhamdulillah, Jemput Rezeki</button>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="modal-countdown-greeting">
         <div class="modal-content">
             <h2 style="text-align: center; border-bottom: none; margin-bottom: 5px;">🌙 Marhaban Ya Ramadhan</h2>
-            <p style="text-align: center; margin-bottom: 15px;">Assalamu'alaikum wr.wb. Program pembagian berkah THR saat ini sedang dalam masa persiapan.</p>
+            <p style="text-align: center; margin-bottom: 15px;">Assalamu'alaikum wr.wb. Program pembagian berkah THR dari SukaCoding saat ini sedang dalam masa persiapan.</p>
             <p style="text-align: center; margin-bottom: 25px;">Mari bersama menantikan waktu pembukaannya sambil mendengarkan alunan lagu spesial.</p>
             <button class="btn" onclick="mulaiTunggu()">Sabar Menunggu & Putar Musik</button>
         </div>
@@ -335,17 +438,17 @@
     <div class="modal-overlay" id="modal-instruksi">
         <div class="modal-content">
             <h2 style="text-align: center; border-bottom: none; margin-bottom: 5px;">📜 Panduan Penjemputan Rezeki</h2>
-            <p style="text-align: center; margin-bottom: 20px;">Assalamu'alaikum. Selamat datang! Waktu penjemputan rezeki telah tiba. Silakan ikuti langkah mudah berikut:</p>
+            <p style="text-align: center; margin-bottom: 20px;">Assalamu'alaikum. Selamat datang di program berbagi SukaCoding! Waktu penjemputan rezeki telah tiba. Silakan ikuti langkah mudah berikut:</p>
             <ol style="color: #555; line-height: 1.6; margin-bottom: 20px;">
-                <li><strong>Isi Identitas:</strong> Masukkan nama lengkap Anda pada kolom yang tersedia di halaman utama.</li>
+                <li><strong>Isi Data:</strong> Masukkan nama lengkap Anda dan pilih nominal hadiah.</li>
                 <li><strong>Uji Wawasan:</strong> Jawablah beberapa pertanyaan singkat seputar wawasan keislaman dengan sungguh-sungguh.</li>
-                <li><strong>Jemput Rezeki:</strong> Setelah berhasil, Anda dapat memindai (scan) QR Code atau mengklik tautan yang muncul untuk mengklaim saldo DANA Kaget Anda.</li>
+                <li><strong>Jemput Rezeki:</strong> Setelah berhasil, Anda dapat memindai (scan) QR Code atau mengklik tautan yang muncul untuk mengklaim saldo DANA Anda.</li>
             </ol>
             <button class="btn" style="margin-top: 10px;" onclick="mulaiProgram()">Insya Allah, Saya Paham</button>
         </div>
     </div>
 
-<div class="modal-overlay" id="modal-program">
+    <div class="modal-overlay" id="modal-program">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal('modal-program')">&times;</button>
             <h2>Tentang Program</h2>
@@ -360,10 +463,9 @@
             <h2>Kebijakan Privasi</h2>
             <p>Kami sangat menjaga amanah privasi Anda. Berikut adalah kebijakan kami terkait data yang Anda masukkan:</p>
             <ul>
-                <li><strong>Pengumpulan Data:</strong> Kami hanya mengumpulkan Nama Lengkap dan jawaban kuis Anda sebagai bentuk itikad baik.</li>
+                <li><strong>Pengumpulan Data:</strong> Kami mengumpulkan Nama Lengkap, pilihan hadiah, dan jawaban kuis Anda sebagai bentuk itikad baik.</li>
                 <li><strong>Penggunaan Data:</strong> Data tersebut murni digunakan untuk keperluan verifikasi internal program berbagi ini dan tidak akan disalahgunakan.</li>
                 <li><strong>Keamanan:</strong> Data Anda disimpan secara aman menggunakan sistem basis data terenkripsi.</li>
-                <li>Kami <strong>tidak akan</strong> menjual, menyebarkan, atau membagikan informasi Anda kepada pihak ketiga mana pun tanpa izin.</li>
             </ul>
         </div>
     </div>
@@ -374,40 +476,64 @@
             <h2>Syarat & Ketentuan</h2>
             <p>Dengan mengikuti program ini, Anda menyetujui ketentuan penyaluran rezeki berikut:</p>
             <ul>
-                <li>Peserta wajib mengisi Nama Lengkap dengan identitas yang benar dan bahasa yang santun.</li>
+                <li>Peserta wajib mengisi Nama Lengkap dengan identitas yang benar.</li>
                 <li>Peserta diharapkan menjawab seluruh pertanyaan wawasan keislaman yang disediakan.</li>
-                <li>Penyaluran rezeki (DANA Kaget) bersifat <strong>terbatas</strong> sesuai dengan kuota dan nominal yang telah ditetapkan pada tautan penyedia.</li>
+                <li>Penyaluran rezeki bersifat <strong>terbatas</strong> sesuai dengan kuota dan nominal yang telah ditetapkan.</li>
                 <li>Setiap individu diharapkan hanya melakukan klaim sebanyak 1 (satu) kali agar peserta lain dapat turut merasakan keberkahan.</li>
-                <li>Penyelenggara berhak membatalkan penyaluran jika ditemukan indikasi tindakan yang kurang sesuai dengan adab dan ketentuan program.</li>
             </ul>
         </div>
     </div>
 
     <script>
-        // Fungsi Membuka Tutup Hamburger Menu
         function toggleMenu() {
             const navMenu = document.getElementById('navMenu');
             navMenu.classList.toggle('active');
         }
 
-        const targetDate = new Date("March 21, 2026 00:00:00").getTime();
+        const targetDateMain = new Date("March 21, 2026 00:00:00").getTime();
+        const targetDate100k = new Date("April 5, 2026 00:00:00").getTime();
+
         let isCountdownActive = false;
         let isMusicPlaying = false;
         let popUpDitampilkan = false; 
 
-        function checkCountdown() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
+        // --- SISTEM ANTI CHEAT WAKTU ---
+        let realTimeMode = false;
+        let currentRealTime = new Date().getTime(); 
 
-            if (distance > 0) {
+        async function fetchServerTime() {
+            try {
+                const response = await fetch('https://worldtimeapi.org/api/timezone/Asia/Jakarta');
+                const data = await response.json();
+                currentRealTime = new Date(data.utc_datetime).getTime();
+                realTimeMode = true;
+                
+                const statusElement = document.getElementById('status-sinkron');
+                if(statusElement) statusElement.style.display = 'none';
+
+                setInterval(() => { currentRealTime += 1000; }, 1000);
+            } catch (error) {
+                console.warn("Gagal terhubung ke satelit waktu. Menggunakan waktu cadangan.", error);
+                const statusElement = document.getElementById('status-sinkron');
+                if(statusElement) statusElement.innerText = "Sistem Offline - Menggunakan waktu cadangan.";
+                setInterval(() => { currentRealTime = new Date().getTime(); }, 1000);
+            }
+        }
+        fetchServerTime();
+
+        function checkCountdowns() {
+            const now = currentRealTime; 
+            
+            const distanceMain = targetDateMain - now;
+            if (distanceMain > 0) {
                 isCountdownActive = true;
                 document.getElementById('step-countdown').style.display = 'block';
                 document.getElementById('step-1').style.display = 'none';
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                const days = Math.floor(distanceMain / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distanceMain % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distanceMain % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distanceMain % (1000 * 60)) / 1000);
 
                 document.getElementById('days').innerText = days.toString().padStart(2, '0');
                 document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
@@ -426,33 +552,48 @@
                     popUpDitampilkan = true;
                 }
             }
+
+            const distance100k = targetDate100k - now;
+            if (distance100k > 0) {
+                const d100k = Math.floor(distance100k / (1000 * 60 * 60 * 24));
+                const h100k = Math.floor((distance100k % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m100k = Math.floor((distance100k % (1000 * 60 * 60)) / (1000 * 60));
+                const s100k = Math.floor((distance100k % (1000 * 60)) / 1000);
+
+                document.getElementById('timer-100k').innerText = `Buka: ${d100k}h ${h100k}j ${m100k}m ${s100k}d`;
+                document.getElementById('opsi-100k-locked').style.display = 'block';
+                document.getElementById('opsi-100k').style.display = 'none';
+            } else {
+                document.getElementById('opsi-100k-locked').style.display = 'none';
+                document.getElementById('opsi-100k').style.display = 'block';
+            }
         }
 
-        setInterval(checkCountdown, 1000);
-        checkCountdown(); 
+        setInterval(checkCountdowns, 1000);
 
         function openModal(id) { 
             document.getElementById(id).style.display = 'flex'; 
-            document.getElementById('navMenu').classList.remove('active'); // Tutup menu garis tiga jika terbuka
+            document.getElementById('navMenu').classList.remove('active'); 
         }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         
         window.onload = function() {
-            const now = new Date().getTime();
-            const distance = targetDate - now;
-
-            if (distance > 0) {
-                openModal('modal-countdown-greeting');
-            } else {
-                openModal('modal-instruksi');
-                popUpDitampilkan = true; 
-            }
+            setTimeout(() => {
+                const distance = targetDateMain - currentRealTime;
+                if (distance > 0) {
+                    openModal('modal-countdown-greeting');
+                } else {
+                    openModal('modal-instruksi');
+                    popUpDitampilkan = true; 
+                }
+            }, 1500);
         };
         
         window.onclick = function(event) {
             if (event.target.className === 'modal-overlay' && 
                 event.target.id !== 'modal-instruksi' && 
-                event.target.id !== 'modal-countdown-greeting') {
+                event.target.id !== 'modal-countdown-greeting' &&
+                event.target.id !== 'modal-hasil-kuis') {
                 event.target.style.display = "none";
             }
         }
@@ -471,7 +612,7 @@
                 isMusicPlaying = true;
                 btnToggle.innerHTML = '🔊';
             }).catch(err => {
-                console.log("Autoplay diblokir, butuh interaksi.", err);
+                console.log("Autoplay diblokir.", err);
                 isMusicPlaying = false;
                 btnToggle.innerHTML = '🔇';
             });
@@ -512,10 +653,27 @@
         }
 
         let namaUser = "";
+        let nominalUser = "";
 
         function lanjutKeKuis() {
             namaUser = document.getElementById('namaLengkap').value;
-            if(namaUser.trim() === "") { alert("Mohon berkenan untuk mengisi nama lengkap Anda terlebih dahulu."); return; }
+            const nominalPilihan = document.querySelector('input[name="nominal"]:checked');
+
+            if(namaUser.trim() === "") { 
+                alert("Mohon berkenan untuk mengisi nama lengkap Anda terlebih dahulu."); 
+                return; 
+            }
+            if(!nominalPilihan) {
+                alert("Mohon pilih nominal hadiah THR yang Anda inginkan.");
+                return;
+            }
+
+            nominalUser = nominalPilihan.value;
+            const nominalRupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(nominalUser);
+
+            document.getElementById('tampil-nominal').innerText = nominalRupiah;
+            document.getElementById('tampil-nominal-akhir').innerText = nominalRupiah;
+
             document.getElementById('step-1').style.display = 'none';
             document.getElementById('step-2').style.display = 'block';
         }
@@ -559,6 +717,15 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        // Kunci Jawaban Kuis
+        const kunciJawaban = {
+            q1: "Ramadhan",
+            q2: "2 Hijriyah",
+            q3: "Lailatul Qadar",
+            q4: "Berangsur"
+        };
+
+        // --- Logika Submit Kuis & Penilaian ---
         document.getElementById('btn-kirim').addEventListener('click', async () => {
             const q1 = document.querySelector('input[name="q1"]:checked');
             const q2 = document.querySelector('input[name="q2"]:checked');
@@ -571,12 +738,22 @@
             }
 
             const btnKirim = document.getElementById('btn-kirim');
-            btnKirim.innerText = "Memproses Verifikasi...";
+            btnKirim.innerText = "Memeriksa Jawaban...";
             btnKirim.disabled = true;
 
+            // Hitung Skor
+            let skor = 0;
+            if (q1.value === kunciJawaban.q1) skor += 25;
+            if (q2.value === kunciJawaban.q2) skor += 25;
+            if (q3.value === kunciJawaban.q3) skor += 25;
+            if (q4.value === kunciJawaban.q4) skor += 25;
+
             try {
+                // Simpan ke Firestore beserta skor
                 await addDoc(collection(db, "klaim_thr"), {
                     nama_lengkap: namaUser,
+                    nominal_hadiah: nominalUser, 
+                    skor_kuis: skor,
                     jawaban_q1: q1.value,
                     jawaban_q2: q2.value,
                     jawaban_q3: q3.value,
@@ -584,18 +761,71 @@
                     waktu_klaim: new Date()
                 });
 
+                // Setel tampilan modal skor
+                document.getElementById('tampil-skor').innerText = skor;
+                const pesanKuisBox = document.getElementById('pesan-skor');
+
+                if (skor === 100) {
+                    pesanKuisBox.innerHTML = `<strong>Masya Allah, ${namaUser}!</strong> Pemahaman wawasan agama Anda sangat luar biasa. Semoga ilmu yang dimiliki menjadi jalan kebaikan dan keberkahan untuk Anda dan sekitar.`;
+                } else {
+                    pesanKuisBox.innerHTML = `<strong>Tetap Semangat Belajar ${namaUser}!</strong><br><br>"Barangsiapa menempuh suatu jalan untuk menuntut ilmu, maka Allah akan mudahkan baginya jalan menuju Surga." (HR. Muslim)<br><br>Mari jadikan momen Ramadhan ini untuk terus memperdalam ilmu agama kita.`;
+                }
+
                 document.getElementById('tampil-nama').innerText = namaUser;
-                document.getElementById('step-2').style.display = 'none';
-                document.getElementById('step-3').style.display = 'block';
+                openModal('modal-hasil-kuis'); // Tampilkan pop-up skor
 
             } catch (e) {
                 console.error("Error: ", e);
                 alert("Mohon maaf, terjadi kendala pada sistem. Namun, Anda tetap dapat melanjutkan proses klaim.");
+                
+                // Fallback jika database gagal, tetap izinkan klaim
                 document.getElementById('tampil-nama').innerText = namaUser;
                 document.getElementById('step-2').style.display = 'none';
                 document.getElementById('step-3').style.display = 'block';
             }
         });
+
+        // --- Logika Tutup Modal Skor & Pindah ke Step 3 (DANA Kaget) ---
+        document.getElementById('btn-lanjut-klaim').addEventListener('click', () => {
+            closeModal('modal-hasil-kuis');
+            document.getElementById('step-2').style.display = 'none';
+            document.getElementById('step-3').style.display = 'block';
+        });
+
+        // --- Logika Kirim Ulasan & Rating ---
+        document.getElementById('btn-kirim-ulasan').addEventListener('click', async () => {
+            const ratingInput = document.querySelector('input[name="rating"]:checked');
+            const teksUlasan = document.getElementById('teks-ulasan').value;
+
+            if (!ratingInput) {
+                alert("Mohon berikan rating bintang (1-5) terlebih dahulu.");
+                return;
+            }
+
+            const ratingValue = parseInt(ratingInput.value);
+            const btnUlasan = document.getElementById('btn-kirim-ulasan');
+            btnUlasan.innerText = "Mengirim Ulasan...";
+            btnUlasan.disabled = true;
+
+            try {
+                await addDoc(collection(db, "ulasan"), {
+                    nama: namaUser, 
+                    rating: ratingValue,
+                    komentar: teksUlasan,
+                    waktu_ulasan: new Date()
+                });
+
+                document.getElementById('form-ulasan').style.display = 'none';
+                document.getElementById('ulasan-sukses').style.display = 'block';
+
+            } catch (e) {
+                console.error("Error menambah ulasan: ", e);
+                alert("Mohon maaf, terjadi kendala saat mengirim ulasan. Silakan coba lagi.");
+                btnUlasan.innerText = "Kirim Ulasan";
+                btnUlasan.disabled = false;
+            }
+        });
+
     </script>
 </body>
-</html>
+    </html>
