@@ -297,8 +297,8 @@
                             <label for="nom20" class="radio-label">Rp 20.000</label>
                         </div>
                         <div class="radio-container">
-                            <input type="radio" name="nominal" id="nom50" value="50000">
-                            <label for="nom50" class="radio-label">Rp 50.000</label>
+                            <input type="radio" name="nominal" id="nom60" value="60000">
+                            <label for="nom60" class="radio-label">Rp 60.000</label>
                         </div>
 
                         <div class="radio-container" id="opsi-100k-locked">
@@ -379,13 +379,13 @@
                     <p style="font-size: 0.9rem; margin-bottom: 10px;">Pindai kode QR atau klik tombol di bawah ini untuk menerima rezeki Anda dari SukaCoding.</p>
                     
                     <div class="qr-box">
-                        <img id="qr-code" src="qr.jpg" alt="QR Code DANA Kaget">
+                        <img id="qr-code" src="" alt="QR Code DANA Kaget">
                     </div>
                     
                     <br>
                     <button class="btn-unduh-qr" onclick="unduhQRCode()">⬇ Unduh Gambar QR</button>
                     
-                    <a href="MASUKKAN_LINK_DANA_KAGET_ANDA_DISINI" target="_blank" class="btn-dana">Klaim THR Sekarang</a>
+                    <a href="#" target="_blank" class="btn-dana" id="link-dana-kaget">Klaim THR Sekarang</a>
                 </div>
 
                 <div class="rating-container" id="form-ulasan">
@@ -657,6 +657,23 @@
         let namaUser = "";
         let nominalUser = "";
 
+        // ---- KONFIGURASI DANA KAGET & GAMBAR QR ----
+        // Silakan sesuaikan isi link dan nama file gambar di bawah ini
+        const danaConfig = {
+            "20000": {
+                link: "MASUKKAN_LINK_DANA_20K_DISINI",
+                qr: "qr_20k.jpg"
+            },
+            "60000": {
+                link: "MASUKKAN_LINK_DANA_60K_DISINI",
+                qr: "qr_60k.jpg"
+            },
+            "100000": {
+                link: "MASUKKAN_LINK_DANA_100K_DISINI",
+                qr: "qr_100k.jpg"
+            }
+        };
+
         function lanjutKeKuis() {
             namaUser = document.getElementById('namaLengkap').value;
             const nominalPilihan = document.querySelector('input[name="nominal"]:checked');
@@ -676,6 +693,12 @@
             document.getElementById('tampil-nominal').innerText = nominalRupiah;
             document.getElementById('tampil-nominal-akhir').innerText = nominalRupiah;
 
+            // --- Logika Update Link dan QR Sesuai Pilihan ---
+            if (danaConfig[nominalUser]) {
+                document.getElementById('link-dana-kaget').href = danaConfig[nominalUser].link;
+                document.getElementById('qr-code').src = danaConfig[nominalUser].qr;
+            }
+
             document.getElementById('step-1').style.display = 'none';
             document.getElementById('step-2').style.display = 'block';
         }
@@ -689,7 +712,8 @@
                     const a = document.createElement('a');
                     a.style.display = 'none';
                     a.href = url;
-                    a.download = 'QR_Berkah_THR(SukaCoding).png';
+                    // Supaya nama filenya lebih pas, ditambahkan angka nominal (opsional)
+                    a.download = `QR_Berkah_THR_${nominalUser}.png`;
                     document.body.appendChild(a);
                     a.click();
                     window.URL.revokeObjectURL(url);
@@ -830,4 +854,4 @@
 
     </script>
 </body>
-            </html>
+    </html>
