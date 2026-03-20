@@ -142,27 +142,14 @@
         .btn:active { transform: translateY(2px); box-shadow: inset 5px 5px 10px rgba(0,0,0,0.1); }
         .btn:disabled { background: #ccc; cursor: not-allowed; color: #888; box-shadow: none; }
 
-        /* DANA Kaget Section */
-        .dana-card {
-            background: linear-gradient(135deg, var(--dana-blue), #0b6db5); padding: 25px 20px;
-            border-radius: 15px; color: white; margin-top: 20px; box-shadow: 0 10px 20px rgba(17, 142, 233, 0.3); text-align: center;
+        /* Tombol Sekunder (Lihat Ulasan) */
+        .btn-sekunder {
+            width: 100%; background: transparent; color: var(--primary);
+            padding: 12px; border: 2px solid var(--primary); border-radius: 10px;
+            font-size: 0.95rem; font-weight: bold; cursor: pointer; text-transform: uppercase;
+            transition: 0.2s; margin-top: 10px;
         }
-        .dana-card h2 { color: white; margin-bottom: 5px; font-size: clamp(1.2rem, 4vw, 1.4rem);}
-        .qr-box {
-            background: white; padding: 10px; border-radius: 10px; display: inline-block;
-            margin: 15px 0 10px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .qr-box img { width: 100%; max-width: 150px; height: auto; display: block; }
-        .btn-unduh-qr {
-            background: transparent; color: white; border: 1px solid white; padding: 8px 15px; 
-            border-radius: 8px; font-size: 0.85rem; cursor: pointer; transition: 0.3s; display: inline-block; margin-bottom: 15px;
-        }
-        .btn-unduh-qr:hover { background: white; color: var(--dana-blue); }
-        .btn-dana {
-            background: white; color: var(--dana-blue); padding: 12px; border-radius: 8px;
-            text-decoration: none; font-weight: bold; display: block; margin-top: 5px; transition: 0.3s;
-        }
-        .btn-dana:hover { background: #f0f0f0; }
+        .btn-sekunder:hover { background: #eaf5f1; }
 
         /* Modal Styles */
         .modal-overlay {
@@ -194,6 +181,14 @@
         /* Step Visibility */
         #step-1, #step-2, #step-3 { display: none; }
 
+        /* Stok Habis Box */
+        .stok-habis-box {
+            background: #ffeaea; border: 2px dashed #d9534f; padding: 20px;
+            border-radius: 10px; color: #d9534f; margin-bottom: 20px; text-align: center;
+        }
+        .stok-habis-box h2 { color: #d9534f; font-size: 1.5rem; margin-bottom: 10px; border-bottom: none; }
+        .stok-habis-box p { color: #555; font-size: 0.95rem; line-height: 1.5; }
+
         /* Rating & Ulasan Styles */
         .rating-container {
             background: #fff; padding: 20px; border-radius: 15px; margin-top: 25px; 
@@ -218,6 +213,51 @@
         }
         .nilai-besar { font-size: 2.5rem; font-weight: bold; color: var(--primary); display: block; text-align: center; margin-bottom: 10px;}
 
+        /* --- LAYAR PENUH (ULASAN & PERINGKAT) --- */
+        .layar-penuh-container {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg); background-image: radial-gradient(circle at top right, #c1e6d8, transparent);
+            z-index: 1001; overflow-y: auto; padding: 20px;
+        }
+        .layar-penuh-content {
+            max-width: 600px; margin: 30px auto; background: white; padding: 30px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative;
+        }
+        .layar-penuh-content h2 { color: var(--primary); border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-bottom: 20px; text-align: center;}
+        .btn-kembali {
+            position: absolute; top: 15px; left: 15px; background: none; border: none; font-size: 1.2rem;
+            color: var(--primary); cursor: pointer; font-weight: bold; text-decoration: none;
+        }
+        
+        /* Item Ulasan */
+        .ulasan-item {
+            background: #fafafa; border: 1px solid #eee; padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .ulasan-item strong { color: var(--primary); font-size: 1.05rem; }
+        .ulasan-item span { color: #f4c430; font-size: 1.1rem; margin-left: 5px;}
+        .ulasan-item p { margin-top: 8px; font-size: 0.95rem; color: #555; line-height: 1.5;}
+
+        /* Item Peringkat */
+        .peringkat-item {
+            background: #fafafa; border: 1px solid #eee; padding: 15px; border-radius: 12px; margin-bottom: 15px;
+            display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .peringkat-rank { font-size: 1.5rem; font-weight: bold; color: var(--secondary); margin-right: 15px; width: 30px; text-align: center; }
+        .peringkat-info { flex: 1; text-align: left; }
+        .peringkat-info strong { color: var(--primary); font-size: 1.05rem; display: block; margin-bottom: 3px; }
+        .peringkat-info small { color: #666; font-size: 0.85rem; display: block; }
+        .peringkat-skor { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-align: right;}
+
+        /* --- TOAST NOTIFIKASI SERVER ONLINE --- */
+        #toast-online {
+            visibility: hidden; min-width: 250px; background-color: var(--primary); color: #fff;
+            text-align: center; border-radius: 10px; padding: 16px; position: fixed; z-index: 2000;
+            left: 50%; top: 80px; transform: translateX(-50%); font-size: 0.95rem; font-weight: bold;
+            box-shadow: 0 4px 15px rgba(4, 92, 67, 0.4); border: 2px solid var(--secondary);
+            opacity: 0; transition: opacity 0.5s, top 0.5s;
+        }
+        #toast-online.show { visibility: visible; top: 100px; opacity: 1; }
+
         /* Responsif Tampilan HP */
         @media (max-width: 600px) {
             .hamburger { display: block; }
@@ -231,6 +271,7 @@
             .nominal-options { flex-direction: column; }
             .radio-container { width: 100%; }
             .modal-content { padding: 20px; }
+            .layar-penuh-content { margin: 10px auto; padding: 20px; }
             #music-toggle { width: 45px; height: 45px; font-size: 1.2rem; bottom: 15px; right: 15px; }
             .btn { font-size: 1rem; padding: 12px; }
         }
@@ -248,6 +289,8 @@
 
     <button id="music-toggle" onclick="toggleMusic()" title="Putar/Hentikan Musik">🔇</button>
 
+    <div id="toast-online">✅ Status sistem server Online terhubung</div>
+
     <nav>
         <div class="logo-container">
             <div class="logo">BerkahTHR.</div>
@@ -255,6 +298,8 @@
         </div>
         <div class="hamburger" onclick="toggleMenu()">☰</div>
         <div class="nav-links" id="navMenu">
+            <button onclick="bukaLayarPeringkat()">Peringkat</button>
+            <button onclick="bukaLayarUlasan()">Ulasan</button>
             <button onclick="openModal('modal-program')">Tentang Program</button>
             <button onclick="openModal('modal-privasi')">Privasi Pengguna</button>
             <button onclick="openModal('modal-syarat')">Syarat & Ketentuan</button>
@@ -366,26 +411,15 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn" id="btn-kirim">Kirim Jawaban & Klaim THR</button>
+                    <button type="button" class="btn" id="btn-kirim">Kirim Jawaban</button>
                 </form>
             </div>
 
             <div id="step-3" style="text-align: center;">
-                <h1 style="color: #118ee9;">Alhamdulillah! 🎉</h1>
-                <p class="subtitle">Jazakumullah khairan, <strong id="tampil-nama"></strong>! Silakan jemput rezeki senilai <strong id="tampil-nominal-akhir"></strong> melalui tautan DANA Kaget di bawah ini.</p>
                 
-                <div class="dana-card">
-                    <h2>Tautan DANA Kaget</h2>
-                    <p style="font-size: 0.9rem; margin-bottom: 10px;">Pindai kode QR atau klik tombol di bawah ini untuk menerima rezeki Anda dari SukaCoding.</p>
-                    
-                    <div class="qr-box">
-                        <img id="qr-code" src="" alt="QR Code DANA Kaget">
-                    </div>
-                    
-                    <br>
-                    <button class="btn-unduh-qr" onclick="unduhQRCode()">⬇ Unduh Gambar QR</button>
-                    
-                    <a href="#" target="_blank" class="btn-dana" id="link-dana-kaget">Klaim THR Sekarang</a>
+                <div class="stok-habis-box">
+                    <h2>Mohon Maaf 🙏</h2>
+                    <p>Jazakumullah khairan <strong><span id="tampil-nama-habis"></span></strong>, hasil kuis Anda sudah kami terima. Namun mohon maaf, <strong>stok kuota THR saat ini sudah habis</strong>. Semoga ada rezeki di lain waktu.</p>
                 </div>
 
                 <div class="rating-container" id="form-ulasan">
@@ -403,17 +437,49 @@
                     <textarea id="teks-ulasan" rows="3" class="ulasan-text" placeholder="Tuliskan komentar atau doa Anda di sini... (opsional)"></textarea>
                     
                     <button class="btn" id="btn-kirim-ulasan" style="padding: 12px; font-size: 0.95rem;">Kirim Ulasan</button>
+                    <button class="btn-sekunder" type="button" onclick="bukaLayarUlasan()">Lihat Semua Ulasan</button>
                 </div>
 
                 <div id="ulasan-sukses" style="display:none; text-align:center; padding: 20px; background:#eaf5f1; border-radius: 10px; margin-top:25px; border: 1px solid var(--primary);">
                     <p style="color: var(--primary); font-weight: bold; font-size: 1.1rem;">Terima kasih atas ulasan Anda! 🙏</p>
-                    <p style="font-size: 0.9rem; color: #555; margin-top: 5px;">Semoga rezekinya berkah.</p>
+                    <p style="font-size: 0.9rem; color: #555; margin-top: 5px; margin-bottom: 15px;">Komentar Anda dapat dilihat di menu <strong>Ulasan</strong> pada pojok kanan atas.</p>
+                    <button class="btn-sekunder" type="button" onclick="bukaLayarUlasan()">Lihat Semua Ulasan</button>
                 </div>
 
             </div>
 
         </div>
     </main>
+
+    <div id="layar-ulasan" class="layar-penuh-container">
+        <div class="layar-penuh-content">
+            <button class="btn-kembali" onclick="tutupLayarUlasan()">⬅ Kembali</button>
+            <h2 style="margin-top: 15px;">Ulasan Publik 💬</h2>
+            <div id="list-ulasan-penuh" style="max-height: 70vh; overflow-y: auto; padding-right: 5px;">
+                <p style="font-size: 0.9rem; color: #888; text-align: center; margin-top: 20px;">Memuat ulasan...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="layar-peringkat" class="layar-penuh-container">
+        <div class="layar-penuh-content">
+            <button class="btn-kembali" onclick="tutupLayarPeringkat()">⬅ Kembali</button>
+            <h2 style="margin-top: 15px;">Papan Peringkat 🏆</h2>
+            <p style="text-align: center; font-size: 0.85rem; color: #666; margin-bottom: 15px;">Dihitung berdasarkan Skor tertinggi dan Waktu tercepat.</p>
+            <div id="list-peringkat-penuh" style="max-height: 70vh; overflow-y: auto; padding-right: 5px;">
+                <p style="font-size: 0.9rem; color: #888; text-align: center; margin-top: 20px;">Memuat peringkat...</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-peringatan">
+        <div class="modal-content" style="text-align: center; max-width: 400px; padding: 25px;">
+            <h2 style="color: #d9534f; border-bottom: none; margin-bottom: 5px; font-size: 2rem;">⚠️</h2>
+            <h3 style="color: var(--primary); margin-bottom: 10px;">Mohon Perhatian</h3>
+            <p id="teks-peringatan" style="margin-bottom: 20px; color: #555; line-height: 1.5; font-size: 0.95rem;"></p>
+            <button class="btn" onclick="closeModal('modal-peringatan')" style="padding: 10px;">Saya Mengerti</button>
+        </div>
+    </div>
 
     <div class="modal-overlay" id="modal-hasil-kuis">
         <div class="modal-content" style="text-align: center;">
@@ -441,8 +507,8 @@
             <p style="text-align: center; margin-bottom: 20px;">Assalamu'alaikum. Selamat datang di program berbagi SukaCoding! Waktu penjemputan rezeki telah tiba. Silakan ikuti langkah mudah berikut:</p>
             <ol style="color: #555; line-height: 1.6; margin-bottom: 20px;">
                 <li><strong>Isi Data:</strong> Masukkan nama lengkap Anda dan pilih nominal hadiah.</li>
-                <li><strong>Uji Wawasan:</strong> Jawablah beberapa pertanyaan singkat seputar wawasan keislaman dengan sungguh-sungguh.</li>
-                <li><strong>Jemput Rezeki:</strong> Setelah berhasil, Anda dapat memindai (scan) QR Code atau mengklik tautan yang muncul untuk mengklaim saldo DANA Anda.</li>
+                <li><strong>Uji Wawasan:</strong> Jawablah beberapa pertanyaan singkat seputar wawasan keislaman secepat dan setepat mungkin untuk menaikkan peringkat Anda.</li>
+                <li><strong>Jemput Rezeki:</strong> Sistem akan memeriksa ketersediaan kuota THR secara otomatis setelah kuis diselesaikan.</li>
             </ol>
             <button class="btn" style="margin-top: 10px;" onclick="mulaiProgram()">Insya Allah, Saya Paham</button>
         </div>
@@ -492,12 +558,47 @@
             navMenu.classList.toggle('active');
         }
 
-        const targetDateMain = new Date("March 21, 2026 00:00:00").getTime();
-        const targetDate100k = new Date("April 5, 2026 00:00:00").getTime();
+        function bukaLayarUlasan() {
+            document.getElementById('layar-ulasan').style.display = 'block';
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        function tutupLayarUlasan() {
+            document.getElementById('layar-ulasan').style.display = 'none';
+        }
+
+        function bukaLayarPeringkat() {
+            document.getElementById('layar-peringkat').style.display = 'block';
+            document.getElementById('navMenu').classList.remove('active');
+        }
+
+        function tutupLayarPeringkat() {
+            document.getElementById('layar-peringkat').style.display = 'none';
+        }
+
+        // Custom Peringatan / Alert
+        function showWarning(pesan) {
+            document.getElementById('teks-peringatan').innerText = pesan;
+            openModal('modal-peringatan');
+        }
+
+        function tampilkanToastOnline() {
+            const toast = document.getElementById("toast-online");
+            toast.classList.add("show");
+            setTimeout(function(){ toast.classList.remove("show"); }, 4000); // Hilang setelah 4 detik
+        }
+
+        // TANGGAL HITUNG MUNDUR DENGAN PENGUNCI ZONA WAKTU (WIB)
+        const targetDateMain = new Date("2026-03-21T00:00:00+07:00").getTime();
+        const targetDate100k = new Date("2026-05-05T00:00:00+07:00").getTime();
 
         let isCountdownActive = false;
         let isMusicPlaying = false;
         let popUpDitampilkan = false; 
+        let serverOnlineNotified = false; // Mencegah toast muncul berkali-kali
+
+        // Variabel untuk melacak waktu Kuis
+        let waktuMulaiKuis = 0;
 
         // --- SISTEM ANTI CHEAT WAKTU ---
         let realTimeMode = false;
@@ -549,9 +650,16 @@
                     document.getElementById('step-1').style.display = 'block';
                 }
 
+                // Tampilkan Instuksi pertama kali buka
                 if (!popUpDitampilkan) {
                     openModal('modal-instruksi');
                     popUpDitampilkan = true;
+                }
+
+                // Tampilkan Toast Notifikasi Server Online
+                if (!serverOnlineNotified) {
+                    tampilkanToastOnline();
+                    serverOnlineNotified = true;
                 }
             }
 
@@ -592,9 +700,11 @@
         };
         
         window.onclick = function(event) {
+            // Tutup modal jika klik area luar modal, kecuali untuk Peringatan & Kuis agar wajib diklik
             if (event.target.className === 'modal-overlay' && 
                 event.target.id !== 'modal-instruksi' && 
                 event.target.id !== 'modal-countdown-greeting' &&
+                event.target.id !== 'modal-peringatan' &&
                 event.target.id !== 'modal-hasil-kuis') {
                 event.target.style.display = "none";
             }
@@ -657,33 +767,16 @@
         let namaUser = "";
         let nominalUser = "";
 
-        // ---- KONFIGURASI DANA KAGET & GAMBAR QR ----
-        // Silakan sesuaikan isi link dan nama file gambar di bawah ini
-        const danaConfig = {
-            "20000": {
-                link: "MASUKKAN_LINK_DANA_20K_DISINI",
-                qr: "qr_20k.jpg"
-            },
-            "60000": {
-                link: "MASUKKAN_LINK_DANA_60K_DISINI",
-                qr: "qr_60k.jpg"
-            },
-            "100000": {
-                link: "MASUKKAN_LINK_DANA_100K_DISINI",
-                qr: "qr_100k.jpg"
-            }
-        };
-
         function lanjutKeKuis() {
             namaUser = document.getElementById('namaLengkap').value;
             const nominalPilihan = document.querySelector('input[name="nominal"]:checked');
 
             if(namaUser.trim() === "") { 
-                alert("Mohon berkenan untuk mengisi nama lengkap Anda terlebih dahulu."); 
+                showWarning("Mohon berkenan untuk mengisi nama lengkap Anda terlebih dahulu pada kolom yang tersedia."); 
                 return; 
             }
             if(!nominalPilihan) {
-                alert("Mohon pilih nominal hadiah THR yang Anda inginkan.");
+                showWarning("Mohon pilih nominal hadiah THR yang Anda inginkan sebelum melanjutkan.");
                 return;
             }
 
@@ -691,44 +784,18 @@
             const nominalRupiah = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(nominalUser);
 
             document.getElementById('tampil-nominal').innerText = nominalRupiah;
-            document.getElementById('tampil-nominal-akhir').innerText = nominalRupiah;
-
-            // --- Logika Update Link dan QR Sesuai Pilihan ---
-            if (danaConfig[nominalUser]) {
-                document.getElementById('link-dana-kaget').href = danaConfig[nominalUser].link;
-                document.getElementById('qr-code').src = danaConfig[nominalUser].qr;
-            }
 
             document.getElementById('step-1').style.display = 'none';
             document.getElementById('step-2').style.display = 'block';
-        }
 
-        function unduhQRCode() {
-            const qrImage = document.getElementById('qr-code').src;
-            fetch(qrImage)
-                .then(response => response.blob())
-                .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    // Supaya nama filenya lebih pas, ditambahkan angka nominal (opsional)
-                    a.download = `QR_Berkah_THR_${nominalUser}.png`;
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.body.removeChild(a);
-                })
-                .catch(err => {
-                    console.error("Gagal mengunduh gambar:", err);
-                    alert("Mohon maaf, terjadi kendala saat mengunduh QR Code. Silakan tangkap layar (screenshot) sebagai alternatif.");
-                });
+            // Mulai stopwatch untuk peringkat
+            waktuMulaiKuis = new Date().getTime();
         }
     </script>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBhAC4Dz3vRHbA-iE1KkG_xxIE7hv5MXP0",
@@ -742,6 +809,92 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
+
+        // --- SISTEM READ REALTIME ULASAN ---
+        const qUlasan = query(collection(db, "ulasan"), orderBy("waktu_ulasan", "desc"));
+        onSnapshot(qUlasan, (snapshot) => {
+            const listUlasanDiv = document.getElementById('list-ulasan-penuh');
+            if(snapshot.empty) {
+                listUlasanDiv.innerHTML = '<p style="font-size: 0.9rem; color: #888; text-align: center; margin-top: 20px;">Belum ada ulasan dari pengguna.</p>';
+                return;
+            }
+            
+            let htmlUlasan = '';
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const stars = '⭐'.repeat(data.rating || 5); 
+                htmlUlasan += `
+                    <div class="ulasan-item">
+                        <strong>${data.nama}</strong> <span>${stars}</span>
+                        <p>${data.komentar}</p>
+                    </div>
+                `;
+            });
+            listUlasanDiv.innerHTML = htmlUlasan;
+        }, (error) => {
+            console.error("Gagal memuat ulasan publik: ", error);
+            document.getElementById('list-ulasan-penuh').innerHTML = '<p style="font-size: 0.9rem; color: #d9534f; text-align: center; margin-top: 20px;">Gagal terhubung ke database ulasan.</p>';
+        });
+
+        // --- SISTEM READ REALTIME PERINGKAT ---
+        // Kita fetch semua klaim lalu sort di JS (Skor terbesar -> Waktu tercepat)
+        const qPeringkat = query(collection(db, "klaim_thr"));
+        onSnapshot(qPeringkat, (snapshot) => {
+            const listPeringkatDiv = document.getElementById('list-peringkat-penuh');
+            if(snapshot.empty) {
+                listPeringkatDiv.innerHTML = '<p style="font-size: 0.9rem; color: #888; text-align: center; margin-top: 20px;">Belum ada data peserta yang masuk.</p>';
+                return;
+            }
+
+            let dataPeserta = [];
+            snapshot.forEach((doc) => {
+                dataPeserta.push(doc.data());
+            });
+
+            // Sorting: Prioritas 1 Skor (Desc), Prioritas 2 Durasi Waktu (Asc)
+            dataPeserta.sort((a, b) => {
+                let skorA = a.skor_kuis || 0;
+                let skorB = b.skor_kuis || 0;
+                if (skorB !== skorA) return skorB - skorA; // Urutkan skor terbesar
+                
+                let durasiA = a.durasi_detik || 999999;
+                let durasiB = b.durasi_detik || 999999;
+                return durasiA - durasiB; // Urutkan waktu tercepat jika skor sama
+            });
+
+            // Tampilkan top 50 saja agar tidak berat
+            let topPeserta = dataPeserta.slice(0, 50);
+
+            let htmlPeringkat = '';
+            topPeserta.forEach((data, index) => {
+                let rankVisual = "";
+                if (index === 0) rankVisual = "🥇";
+                else if (index === 1) rankVisual = "🥈";
+                else if (index === 2) rankVisual = "🥉";
+                else rankVisual = `#${index + 1}`;
+
+                let waktuTeks = data.durasi_detik ? `${data.durasi_detik} detik` : "Tanpa waktu";
+                
+                // Tambahan: Memformat dan Menampilkan Nominal THR
+                let nominalFormat = data.nominal_hadiah ? `Rp ${parseInt(data.nominal_hadiah).toLocaleString('id-ID')}` : "-";
+
+                htmlPeringkat += `
+                    <div class="peringkat-item">
+                        <div class="peringkat-rank">${rankVisual}</div>
+                        <div class="peringkat-info">
+                            <strong>${data.nama_lengkap}</strong>
+                            <small>Kecepatan: ${waktuTeks} | Target: <span style="color:var(--primary); font-weight:bold;">${nominalFormat}</span></small>
+                        </div>
+                        <div class="peringkat-skor">${data.skor_kuis}</div>
+                    </div>
+                `;
+            });
+            listPeringkatDiv.innerHTML = htmlPeringkat;
+
+        }, (error) => {
+            console.error("Gagal memuat peringkat: ", error);
+            document.getElementById('list-peringkat-penuh').innerHTML = '<p style="font-size: 0.9rem; color: #d9534f; text-align: center; margin-top: 20px;">Gagal memuat papan peringkat.</p>';
+        });
 
         // Kunci Jawaban Kuis
         const kunciJawaban = {
@@ -759,13 +912,17 @@
             const q4 = document.querySelector('input[name="q4"]:checked');
 
             if(!q1 || !q2 || !q3 || !q4) {
-                alert("Mohon berkenan untuk menjawab seluruh pertanyaan wawasan keislaman sebelum melanjutkan.");
+                showWarning("Mohon pastikan Anda telah memilih jawaban untuk seluruh pertanyaan wawasan keislaman sebelum mengirim.");
                 return;
             }
 
             const btnKirim = document.getElementById('btn-kirim');
             btnKirim.innerText = "Memeriksa Jawaban...";
             btnKirim.disabled = true;
+
+            // Hentikan Waktu Kuis
+            let waktuSelesaiKuis = new Date().getTime();
+            let durasiDetik = Math.floor((waktuSelesaiKuis - waktuMulaiKuis) / 1000);
 
             // Hitung Skor
             let skor = 0;
@@ -775,11 +932,12 @@
             if (q4.value === kunciJawaban.q4) skor += 25;
 
             try {
-                // Simpan ke Firestore beserta skor
+                // Simpan ke Firestore beserta skor dan DURASI (kecepatan)
                 await addDoc(collection(db, "klaim_thr"), {
                     nama_lengkap: namaUser,
                     nominal_hadiah: nominalUser, 
                     skor_kuis: skor,
+                    durasi_detik: durasiDetik,
                     jawaban_q1: q1.value,
                     jawaban_q2: q2.value,
                     jawaban_q3: q3.value,
@@ -797,21 +955,21 @@
                     pesanKuisBox.innerHTML = `<strong>Tetap Semangat Belajar ${namaUser}!</strong><br><br>"Barangsiapa menempuh suatu jalan untuk menuntut ilmu, maka Allah akan mudahkan baginya jalan menuju Surga." (HR. Muslim)<br><br>Mari jadikan momen Ramadhan ini untuk terus memperdalam ilmu agama kita.`;
                 }
 
-                document.getElementById('tampil-nama').innerText = namaUser;
+                document.getElementById('tampil-nama-habis').innerText = namaUser;
                 openModal('modal-hasil-kuis'); // Tampilkan pop-up skor
 
             } catch (e) {
                 console.error("Error: ", e);
-                alert("Mohon maaf, terjadi kendala pada sistem. Namun, Anda tetap dapat melanjutkan proses klaim.");
+                showWarning("Mohon maaf, terjadi kendala pada sistem. Namun, Anda tetap dapat melanjutkan proses.");
                 
-                // Fallback jika database gagal, tetap izinkan klaim
-                document.getElementById('tampil-nama').innerText = namaUser;
+                // Fallback jika database gagal, tetap izinkan proses jalan
+                document.getElementById('tampil-nama-habis').innerText = namaUser;
                 document.getElementById('step-2').style.display = 'none';
                 document.getElementById('step-3').style.display = 'block';
             }
         });
 
-        // --- Logika Tutup Modal Skor & Pindah ke Step 3 (DANA Kaget) ---
+        // --- Logika Tutup Modal Skor & Tampilkan "STOK HABIS" (Step 3) ---
         document.getElementById('btn-lanjut-klaim').addEventListener('click', () => {
             closeModal('modal-hasil-kuis');
             document.getElementById('step-2').style.display = 'none';
@@ -824,7 +982,7 @@
             const teksUlasan = document.getElementById('teks-ulasan').value;
 
             if (!ratingInput) {
-                alert("Mohon berikan rating bintang (1-5) terlebih dahulu.");
+                showWarning("Mohon berkenan untuk memberikan rating bintang (1-5) terlebih dahulu sebelum mengirim ulasan.");
                 return;
             }
 
@@ -846,7 +1004,7 @@
 
             } catch (e) {
                 console.error("Error menambah ulasan: ", e);
-                alert("Mohon maaf, terjadi kendala saat mengirim ulasan. Silakan coba lagi.");
+                showWarning("Mohon maaf, terjadi kendala saat mengirim ulasan. Silakan coba lagi nanti.");
                 btnUlasan.innerText = "Kirim Ulasan";
                 btnUlasan.disabled = false;
             }
@@ -854,4 +1012,4 @@
 
     </script>
 </body>
-    </html>
+</html>
