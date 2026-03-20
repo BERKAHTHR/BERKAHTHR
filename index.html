@@ -633,6 +633,10 @@
                 document.getElementById('step-countdown').style.display = 'block';
                 document.getElementById('step-1').style.display = 'none';
 
+                // --- Sembunyikan navbar saat hitung mundur ---
+                document.getElementById('navMenu').style.display = 'none';
+                document.querySelector('.hamburger').style.display = 'none';
+
                 const days = Math.floor(distanceMain / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distanceMain % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distanceMain % (1000 * 60 * 60)) / (1000 * 60));
@@ -645,6 +649,10 @@
             } else {
                 isCountdownActive = false;
                 document.getElementById('step-countdown').style.display = 'none';
+                
+                // --- Munculkan kembali menu navbar ketika waktu habis ---
+                document.getElementById('navMenu').style.display = '';
+                document.querySelector('.hamburger').style.display = '';
                 
                 if(document.getElementById('step-2').style.display !== 'block' && document.getElementById('step-3').style.display !== 'block') {
                     document.getElementById('step-1').style.display = 'block';
@@ -1012,4 +1020,4 @@
 
     </script>
 </body>
-</html>
+    </html>
