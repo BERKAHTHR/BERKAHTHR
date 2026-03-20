@@ -337,13 +337,19 @@
                 <div class="form-group">
                     <label>Pilih Nominal THR</label>
                     <div class="nominal-options">
+                        
                         <div class="radio-container">
-                            <input type="radio" name="nominal" id="nom20" value="20000">
-                            <label for="nom20" class="radio-label">Rp 20.000</label>
+                            <div class="locked-label">
+                                Rp 20.000 🔒
+                                <div class="timer-text" style="color: #888;">Stok Habis</div>
+                            </div>
                         </div>
+                        
                         <div class="radio-container">
-                            <input type="radio" name="nominal" id="nom60" value="60000">
-                            <label for="nom60" class="radio-label">Rp 60.000</label>
+                            <div class="locked-label">
+                                Rp 60.000 🔒
+                                <div class="timer-text" style="color: #888;">Stok Habis</div>
+                            </div>
                         </div>
 
                         <div class="radio-container" id="opsi-100k-locked">
@@ -451,6 +457,26 @@
         </div>
     </main>
 
+    <div class="modal-overlay" id="modal-pengumuman">
+        <div class="modal-content">
+            <h2 style="text-align: center; border-bottom: none; margin-bottom: 10px;">📢 Pemberitahuan</h2>
+            <p style="text-align: center; font-weight: bold; color: var(--primary); margin-bottom: 15px;">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+            
+            <p style="text-align: justify; margin-bottom: 15px; color: #555; line-height: 1.6;">
+                Terima kasih yang sebesar-besarnya atas antusiasme dan partisipasi Anda dalam mengikuti program <strong>BerkahTHR dari SukaCoding</strong>.
+            </p>
+            
+            <p style="text-align: justify; margin-bottom: 15px; color: #555; line-height: 1.6;">
+                Apabila pada kesempatan kali ini Anda belum mendapatkan rezeki karena kuota telah habis, mohon jangan berkecil hati. Insya Allah, rezeki yang tertunda akan senantiasa diganti dengan jalan yang lebih baik oleh Allah SWT.
+            </p>
+            
+            <p style="text-align: justify; margin-bottom: 25px; color: var(--primary); line-height: 1.6;">
+                <strong>Kabar baiknya:</strong> Anda masih memiliki kesempatan untuk menjemput rezeki dengan mengikuti program undian THR senilai <span style="background: var(--primary); color: var(--secondary); padding: 2px 6px; border-radius: 5px; font-weight: bold;">Rp 100.000</span> yang sebentar lagi akan dibuka. Tetap semangat dan persiapkan diri Anda!
+            </p>
+            
+            <button class="btn" onclick="lanjutDariPengumuman()">Alhamdulillah, Saya Mengerti</button>
+        </div>
+    </div>
     <div id="layar-ulasan" class="layar-penuh-container">
         <div class="layar-penuh-content">
             <button class="btn-kembali" onclick="tutupLayarUlasan()">⬅ Kembali</button>
@@ -658,12 +684,8 @@
                     document.getElementById('step-1').style.display = 'block';
                 }
 
-                // Tampilkan Instuksi pertama kali buka
-                if (!popUpDitampilkan) {
-                    openModal('modal-instruksi');
-                    popUpDitampilkan = true;
-                }
-
+                // (Dihapus dari sini karena dipindah ke logika klik tombol pengumuman)
+                
                 // Tampilkan Toast Notifikasi Server Online
                 if (!serverOnlineNotified) {
                     tampilkanToastOnline();
@@ -695,25 +717,40 @@
         }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         
+        // --- LOGIKA BARU UNTUK POP UP AWAL (PENGUMUMAN) ---
         window.onload = function() {
+            setTimeout(() => {
+                // Tampilkan modal pengumuman pertama kali halaman dimuat
+                openModal('modal-pengumuman');
+            }, 1000);
+        };
+
+        function lanjutDariPengumuman() {
+            closeModal('modal-pengumuman');
+            
+            // Beri sedikit jeda waktu sebelum memunculkan popup selanjutnya agar transisi mulus
             setTimeout(() => {
                 const distance = targetDateMain - currentRealTime;
                 if (distance > 0) {
                     openModal('modal-countdown-greeting');
                 } else {
-                    openModal('modal-instruksi');
-                    popUpDitampilkan = true; 
+                    if (!popUpDitampilkan) {
+                        openModal('modal-instruksi');
+                        popUpDitampilkan = true; 
+                    }
                 }
-            }, 1500);
-        };
+            }, 300);
+        }
+        // ---------------------------------------------------
         
         window.onclick = function(event) {
-            // Tutup modal jika klik area luar modal, kecuali untuk Peringatan & Kuis agar wajib diklik
+            // Tutup modal jika klik area luar modal, KECUALI modal yang wajib di-klik tombolnya
             if (event.target.className === 'modal-overlay' && 
                 event.target.id !== 'modal-instruksi' && 
                 event.target.id !== 'modal-countdown-greeting' &&
                 event.target.id !== 'modal-peringatan' &&
-                event.target.id !== 'modal-hasil-kuis') {
+                event.target.id !== 'modal-hasil-kuis' &&
+                event.target.id !== 'modal-pengumuman') {
                 event.target.style.display = "none";
             }
         }
@@ -1020,4 +1057,4 @@
 
     </script>
 </body>
-    </html>
+</html>
